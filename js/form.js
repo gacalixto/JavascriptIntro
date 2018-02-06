@@ -7,9 +7,12 @@ btAdd.addEventListener("click",function(event)
     console.log(paciente);
     //Nova linha na tabela de pacientes
     var pacienteTr = montaTr(paciente,"paciente");   
-    if (!validaPaciente(paciente)) {
-        console.log("Paciente inválido");
-        return;
+    var erros = validaPaciente(paciente);
+    if(erros.length>0)
+    {
+        var mensagemErro = document.querySelector("#mensagem-erro");
+        mensagemErro.textContent = erros;
+        return;//nao executa o que vem depois
     }
     var tabela = document.querySelector("#tabela-pacientes");
     //adiciona o tr à tabela
@@ -72,11 +75,16 @@ function montaTd(dado,classe)
 
 }
 function validaPaciente(paciente) {
-    if (validaPeso(paciente.peso)) {
-        return true;
-    } else {
-        return false;
+    var erros = [];
+    if (!validaPeso(paciente.peso)) {
+        erros.push("Peso Inválido");  
+    } 
+
+    if(!validaAltura(paciente.altura)){
+        erros.push("Altura inválida");
+
     }
+    return erros;
 }
 
 //  usa-se preventdefault para prevenir a ação padrão do form
