@@ -8,6 +8,7 @@
 */
 var alturaValida = true;
 var pesoValido = true;
+var btAdd = document.querySelector("#adicionar-paciente");
 var pacientes = document.querySelectorAll(".paciente");
 for(var i =0; i<pacientes.length;i++){
     var paciente = pacientes[i]; 
@@ -35,5 +36,47 @@ for(var i =0; i<pacientes.length;i++){
     }
 
 }
+
+btAdd.addEventListener("click",function(event)
+{
+    event.preventDefault();
+    var formAdd = document.querySelector("#form-add");//pega o form de adicionar
+
+    //Dados preenchidos no  form
+    var nomeForm = formAdd.nome.value;
+    var pesoForm = formAdd.peso.value;
+    var alturaForm = formAdd.altura.value;
+    var gorduraForm = formAdd.gordura.value;
+    //Nova linha na tabela de pacientes
+    var pacienteTr = document.createElement("tr");
+    //Novas campos nas colunas 
+    var nomeTd = document.createElement("td");
+    var pesoTd = document.createElement("td");
+    var alturaTd = document.createElement("td");
+    var gorduraTd = document.createElement("td");
+    var imcTd = document.createElement("td");
+    //preenchendo os campos
+    nomeTd.textContent = nomeForm;
+    pesoTd.textContent = pesoForm;
+    alturaTd.textContent = alturaForm;
+    gorduraTd.textContent = gorduraForm;
+    //adiciona os tds ao tr
+    pacienteTr.appendChild(nomeTd);
+    pacienteTr.appendChild(pesoTd);
+    pacienteTr.appendChild(alturaTd);
+    pacienteTr.appendChild(gorduraTd);
+
+    var tabela = document.querySelector("#tabela-pacientes");
+    //adiciona o tr à tabela
+    tabela.appendChild(pacienteTr);
+
+});
+//  usa-se preventdefault para prevenir a ação padrão do form
+
+/*function MostraMsg(event) {
+     alert("Fui Clicado!");
+    
+    
+}*/
 
     
